@@ -1,16 +1,54 @@
-# React + Vite
+.................................START--->REDUX.......................................
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Important Note:- Kabhi bhi hame data ko direct change nhi krna hai us se pahele uska dublicate data bnana hai 
+Example Code:- 
+  if (action.type === "ADD_TASK") {
+    return {
+      ...state,  // sabse pahel dublicate bnaya spread operater ka use krke 
+      task: [...state.task, action.payload], // ab operation perform kiya 
+    };
+  }
 
-Currently, two official plugins are available:
+Step 1. Create Store
+code:- 
+const store = createStore(taskReducer); // Yah taskReducre function hai
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Step 2. Create taskReducre Function.
+defination:- iske under ham apne sare function ke logic likte hai 
+code:-
+const initialState = {  // Iske under sare data ko initialized krna hota hai object
+ // ki form me
+  task: [], // jaise sirf maine task ko kiya hai
+};  
 
-## React Compiler
+const taskReducer = (state = initialState, action) => { //yah hame bydefault milta hai
+  if (action.type === "ADD_TASK") {
+    return {
+      ...state,
+      task: [...state.task, action.payload], // 
+    };
+  } else if (action.type === "DELETE_TASK") {
+    const updateTask = state.task.filter((curTask, index) => {
+      return index !== action.payload;
+    });
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+    return {
+      ...state,
+      task: updateTask,
+    };
+  }
+  return state;
+};
 
-## Expanding the ESLint configuration
+Step 3. use dispatch 
+defination:- iska use ham jab function ko call krna hota hai tb krte hai q ki store ke under dispatch ka option hota 
+code:- 
+store.dispatch({ type: "ADD_TASK", payload: "Ritik hu mai" });
+console.log(store.getState()); // iska use ham apne current state/changes ko dekhne ke liye krte hai
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+store.dispatch({ type: "ADD_TASK", payload: "Tipu hu mai" });
+console.log(store.getState());
+
+store.dispatch({ type: "DELETE_TASK", payload: 1 });
+console.log(store.getState());
+
