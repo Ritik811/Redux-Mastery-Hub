@@ -26,16 +26,25 @@ const taskReducer = (state = initialState, action) => {
   return state;
 };
 
+// Action Creater
+const addTAsk = (data) => {
+  return { type: "ADD_TASK", payload: data };
+};
+
+const deleteTask = (id) => {
+  return { type: "DELETE_TASK", payload: id };
+};
+
 // Create Store
 const store = createStore(taskReducer);
 
 console.log(store);
 
-store.dispatch({ type: "ADD_TASK", payload: "Ritik hu mai" });
+store.dispatch(addTAsk("Ritik hu mai"));
 console.log(store.getState());
 
-store.dispatch({ type: "ADD_TASK", payload: "Tipu hu mai" });
+store.dispatch(addTAsk("Tipu hu mai"));
 console.log(store.getState());
 
-store.dispatch({ type: "DELETE_TASK", payload: 1 });
+store.dispatch(deleteTask(1));
 console.log(store.getState());

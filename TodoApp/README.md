@@ -52,3 +52,15 @@ console.log(store.getState());
 store.dispatch({ type: "DELETE_TASK", payload: 1 });
 console.log(store.getState());
 
+Step 4. Action Creator
+defination:- function create krke call krna 
+code:- 
+const addTAsk = (data) => {
+  return { type: "ADD_TASK", payload: data };
+};
+
+const deleteTask = (id) => {
+  return { type: "DELETE_TASK", payload: id };
+};
+
+store.dispatch(addTAsk("Ritik hu mai")); // ab istrah se use krte hai
