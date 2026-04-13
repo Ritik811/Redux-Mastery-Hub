@@ -84,4 +84,7 @@ const handleAddTask = () => {
     dispatch(addTAsk(task)); // yaha pr call kiya hai dispacth ka use krke
   };
 
-  
+Step 7. How to download redux devtools and use in browser
+1. search redux devtools in any browser
+2.import { composeWithDevTools } from "@redux-devtools/extension";
+3. export const store = createStore(taskReducer,composeWithDevTools()); // yaha pr call krna hai 

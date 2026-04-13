@@ -1,5 +1,5 @@
 import { createStore } from "redux";
-
+import { composeWithDevTools } from "@redux-devtools/extension";
 const ADD_TASK = "task/add";
 const DELETE_TASK = "task/delete";
 
@@ -36,4 +36,4 @@ export const deleteTask = (id) => {
 };
 
 // Create Store
-export const store = createStore(taskReducer);
+export const store = createStore(taskReducer,composeWithDevTools());
