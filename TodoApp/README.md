@@ -72,3 +72,16 @@ syntax const state = useSelector((state) = >state);
 consol.log(state);
 code:- 
 const tasks = useSelector((state) => state.task);
+
+Step 6. How to Call Action in react-redux using useDispacth();
+defination:- useDispacth() ka use krke ham action ko store ke under direct call kr skte hai 
+code:- 
+const dispatch = useDispatch();
+const handleAddTask = () => {
+    const task = inputRef.current.value;
+    console.log(task);
+    inputRef.current.value = "";
+    dispatch(addTAsk(task)); // yaha pr call kiya hai dispacth ka use krke
+  };
+
+  

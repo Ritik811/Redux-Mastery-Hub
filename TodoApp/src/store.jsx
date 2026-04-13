@@ -27,24 +27,13 @@ const taskReducer = (state = initialState, action) => {
 };
 
 // Action Creater
-const addTAsk = (data) => {
+export const addTAsk = (data) => {
   return { type: "ADD_TASK", payload: data };
 };
 
-const deleteTask = (id) => {
+export const deleteTask = (id) => {
   return { type: "DELETE_TASK", payload: id };
 };
 
 // Create Store
 export const store = createStore(taskReducer);
-
-console.log(store);
-
-store.dispatch(addTAsk("Ritik hu mai"));
-console.log(store.getState());
-
-store.dispatch(addTAsk("Tipu hu mai"));
-console.log(store.getState());
-
-store.dispatch(deleteTask(1));
-console.log(store.getState());
