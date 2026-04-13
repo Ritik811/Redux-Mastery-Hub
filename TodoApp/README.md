@@ -64,3 +64,11 @@ const deleteTask = (id) => {
 };
 
 store.dispatch(addTAsk("Ritik hu mai")); // ab istrah se use krte hai
+
+Step 5. How to access store in React
+1. using useSelecter() hook provide react-redux
+defination:- iski madat se ham store ko access kr skte hai 
+syntax const state = useSelector((state) = >state);
+consol.log(state);
+code:- 
+const tasks = useSelector((state) => state.task);

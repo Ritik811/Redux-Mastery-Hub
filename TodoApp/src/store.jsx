@@ -36,7 +36,7 @@ const deleteTask = (id) => {
 };
 
 // Create Store
-const store = createStore(taskReducer);
+export const store = createStore(taskReducer);
 
 console.log(store);
 

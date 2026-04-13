@@ -1,5 +1,7 @@
+import { Todo } from "./components/Todo";
+import "./App.css";
 const App = () => {
-  return <h1>Hello REDUX</h1>;
+  return <Todo />;
 };
 
 export default App;
