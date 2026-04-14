@@ -2,6 +2,7 @@ import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { thunk } from "redux-thunk";
 
+
 const ADD_TASK = "task/add";
 const DELETE_TASK = "task/delete";
 const FECTH_TASK = "task/fetch";
@@ -67,3 +68,5 @@ export const store = createStore(
   taskReducer,
   composeWithDevTools(applyMiddleware(thunk)),
 );
+
+
