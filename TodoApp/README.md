@@ -88,3 +88,36 @@ Step 7. How to download redux devtools and use in browser
 1. search redux devtools in any browser
 2.import { composeWithDevTools } from "@redux-devtools/extension";
 3. export const store = createStore(taskReducer,composeWithDevTools()); // yaha pr call krna hai 
+
+Step 8. What is Thunk in Redux
+defination:- Redux Thunk ek Middleware hai jo humein Action Creators ke andar Functions likhne ki permission deta hai, bajaye sirf simple Objects ke.
+Aam taur par Redux actions sirf ek object hote hain, lekin Thunk ki wajah se hum Actions ke andar Async Logic (jaise API calls) handle kar sakte hain.
+
+1. install thunk bun i "react-thunk"
+
+2. export const store = createStore( // isko applyMiddleware(thunk) ke under call   
+// krna prta hai
+  taskReducer,
+  composeWithDevTools(applyMiddleware(thunk)), // yah hai 
+);
+
+3. ab iske baad ham apna function likh skte async wala 
+code:- 
+export const fetchTask = () => {
+  return async (dispatch) => { // yah dispatch by default milta hai
+    try {
+      const res = await fetch(
+        "https://jsonplaceholder.typicode.com/todos?_limit=3",
+      );
+      const task = await res.json();
+      console.log(task);
+
+      dispatch({
+        type: FECTH_TASK,
+        payload: task.map((curTask) => curTask.title),
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};

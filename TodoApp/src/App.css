@@ -113,3 +113,7 @@
 .delete-btn:hover {
   background-color: #d63031;
 }
+
+#fetchData:hover{
+    background-color: rgb(0, 0, 0);
+}

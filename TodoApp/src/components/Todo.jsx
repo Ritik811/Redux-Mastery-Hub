@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ListItem } from "./ListItem";
 import { useRef } from "react";
-import { addTAsk } from "../store.jsx"
+import { addTAsk, fetchTask } from "../store.jsx";
 
 export const Todo = () => {
   const tasks = useSelector((state) => state.task);
@@ -13,6 +13,9 @@ export const Todo = () => {
     inputRef.current.value = "";
     dispatch(addTAsk(task));
   };
+  const handleFetchData = () =>{
+    dispatch(fetchTask());
+  }
   return (
     <section className="todo-section">
       <div className="todo-container">
@@ -32,6 +35,13 @@ export const Todo = () => {
             Add Task
           </button>
         </div>
+        <button
+          className="todo-add-btn"
+          style={{ backgroundColor: "rebeccapurple" }}
+          onClick={handleFetchData}
+        >
+          Fetch Data
+        </button>
 
         <ul className="todo-list">
           {tasks.map((curTask, index) => {
