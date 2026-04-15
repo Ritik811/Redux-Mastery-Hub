@@ -15,9 +15,9 @@ export const Todo = () => {
     dispatch(addTAsk(task));
   };
 
-  // const handleFatchTask = () => {
-  //   dispatch(fetchTask());
-  // };
+  const handleFatchTask = () => {
+    dispatch(fetchTask());
+  };
 
   return (
     <section className="todo-section">
@@ -37,9 +37,9 @@ export const Todo = () => {
           <button className="todo-add-btn" onClick={handleAddTask}>
             Add Task
           </button>
-          {/* <button className="todo-add-btn" onClick={handleFatchTask}>
+          <button className="todo-add-btn" onClick={handleFatchTask}>
             Fetch Task
-          </button> */}
+          </button>
         </div>
 
         <ul className="todo-list">

@@ -1,30 +1,29 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import {
+  configureStore,
+  createAsyncThunk,
+  createSlice,
+} from "@reduxjs/toolkit";
 
-const FECTH_TASK = "task/fetch";
+export const fetchTask = createAsyncThunk("task/fetch", async () => {
+  try {
+    const res = await fetch(
+      "https://jsonplaceholder.typicode.com/todos?_limit=3",
+    );
+    const data = await res.json();
 
-// export const fetchTask = () => {
-//   return async (dispatch) => {
-//     try {
-//       const res = await fetch(
-//         "https://jsonplaceholder.typicode.com/todos?_limit=3",
-//       );
-//       const task = await res.json();
-//       console.log(task);
-
-//       dispatch({
-//         type: FECTH_TASK,
-//         payload: task.map((curTask) => curTask.title),
-//       });
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-// };
+    // Sirf titles ka array return kar rahe hain jaisa tumne pehle kiya tha
+    return data.map((curTask) => curTask.title);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 const taskReducer = createSlice({
   name: "task",
   initialState: {
     task: [],
+    loading: false,
+    error: null,
   },
   reducers: {
     addTAsk(state, action) {
@@ -35,6 +34,19 @@ const taskReducer = createSlice({
         (curTask, index) => index !== action.payload,
       );
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchTask.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchTask.fulfilled, (state, action) => {
+        state.loading = false;
+        state.task.push(...action.payload);
+      })
+      .addCase(fetchTask.rejected, (state, action) => {
+        state.error = "Something went wrong data is not fatch";
+      });
   },
 });
 
